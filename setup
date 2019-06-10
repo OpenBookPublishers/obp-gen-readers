@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -eu
+cd $(dirname $0)
+
+rm -rf -- pdf_to_book_reader PDF-Mine pdfminer epublius
+
+git clone https://github.com/OpenBookPublishers/epublius.git
+git clone https://github.com/OpenBookPublishers/pdf_to_book_reader.git
+git clone https://github.com/OpenBookPublishers/PDF-Mine.git
+git clone https://github.com/euske/pdfminer.git
+
+# these checkouts should probably be done with clone -b
+(cd PDF-Mine && git checkout obp)
+(cd pdfminer && git checkout 14fd0fd2d6ef4e709731377decc6a8c119e5e9d6)
+

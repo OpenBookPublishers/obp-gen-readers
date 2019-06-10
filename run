@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eu
+cd $(dirname $0)
+
+book_name=$1
+
+./makehtmlreader ${book_name}.json $(pwd)/${book_name}.epub
+
+export PYTHONPATH=$(pwd)/pdfminer
+./makepdfreader  ${book_name}.json $(pwd)/${book_name}.pdf
+
