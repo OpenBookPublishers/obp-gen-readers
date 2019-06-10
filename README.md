@@ -13,10 +13,14 @@ set of three files:
 
 and yields the conventional HTML pages and image output (in odd locations).
 
-To run:
+To install:
 
 ```
     ./setup
+```
+
+To run:
+```
     ./run prefix
 ```
 
@@ -26,5 +30,10 @@ Where `prefix` is the common name for your book files, e.g., `Wolfthal-Pogroms_U
 To do
 -----
 
-Generate the JSON file directly from a metadata database.
+Generate the JSON file directly from a metadata database. Ultimately the
+invocation ought to look something like this:
+```
+    ./run 10.11647/OBP.0125
+```
+
 
