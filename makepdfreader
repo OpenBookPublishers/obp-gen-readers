@@ -4,23 +4,29 @@ import sys
 import json
 import subprocess
 import os
+import shutil
 
 def run():
     _, metadata_path, pdf_path = sys.argv
     with open(metadata_path) as f:
         metadata = json.load(f)
 
-    exe = "./example_tgmsbf.sh"
+    metadata_dst = os.path.join(".", "pdf_to_book_reader",
+                                str(metadata['product_id']),
+                                "book_metadata.json")
+    shutil.copy(metadata_path, metadata_dst)
+
+    exe = "make"
     args = [ exe,
-        "-c", str(metadata['product_id']),
-        "-b", metadata['title'],
-        "-d", metadata['blurb'],
-        "-i", pdf_path
+        "PRODUCT_ID=" + str(metadata['product_id']),
+        "TITLE=" + metadata['title'],
+        "BLURB=" + metadata['blurb'],
+        "PDF_PATH=" + pdf_path
     ]
 
     os.chdir(os.path.dirname(__file__))
     os.chdir("pdf_to_book_reader")
-    sys.exit(os.execv(exe, args))
+    sys.exit(os.execvp(exe, args))
 
 if __name__ == '__main__':
     run()
