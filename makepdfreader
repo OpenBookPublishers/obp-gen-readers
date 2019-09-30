@@ -11,9 +11,13 @@ def run():
     with open(metadata_path) as f:
         metadata = json.load(f)
 
-    metadata_dst = os.path.join(".", "pdf_to_book_reader",
-                                str(metadata['product_id']),
+    metadata_dir = os.path.join(".", "pdf_to_book_reader",
+                                str(metadata['product_id']))
+    metadata_dst = os.path.join(metadata_dir,
                                 "book_metadata.json")
+
+    if not os.path.exists(metadata_dir):
+        os.mkdir(metadata_dir)
     shutil.copy(metadata_path, metadata_dst)
 
     exe = "make"
