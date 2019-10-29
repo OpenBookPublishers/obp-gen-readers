@@ -1,0 +1,13 @@
+[submodule "epublius"]
+	path = epublius
+	url = https://github.com/OpenBookPublishers/epublius.git
+[submodule "pdf_to_book_reader"]
+	path = pdf_to_book_reader
+	url = https://github.com/OpenBookPublishers/pdf_to_book_reader.git
+[submodule "PDF-Mine"]
+	path = PDF-Mine
+	url = https://github.com/OpenBookPublishers/PDF-Mine.git
+	branch = obp
+[submodule "pdfminer"]
+	path = pdfminer
+	url = https://github.com/euske/pdfminer.git
