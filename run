@@ -1,12 +1,33 @@
 #!/bin/bash
 
 set -eu
+
+html_reader=True
+pdf_reader=True
+
+for arg in "$@"
+do
+    case $arg in
+        --pdf|--only-pdf)
+            html_reader=False
+            shift
+            ;;
+        --html|--only-html)
+            pdf_reader=False
+            shift
+            ;;
+    esac
+done
+
 cd $(dirname $0)
 
 book_name=$1
 
-./makehtmlreader ${book_name}.json $(pwd)/${book_name}.epub
+if [ "$html_reader" = True ]; then
+    ./makehtmlreader ${book_name}.json $(pwd)/${book_name}.epub
+fi
 
-export PYTHONPATH=$(pwd)/pdfminer
-./makepdfreader  ${book_name}.json $(pwd)/${book_name}.pdf
-
+if [ "$pdf_reader" = True ]; then
+    export PYTHONPATH=$(pwd)/pdfminer
+    ./makepdfreader  ${book_name}.json $(pwd)/${book_name}.pdf
+fi
